@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tarjetas de Invitación - Diseñador de tarjetas de Invitación</title>
+    <!-- Google Fonts: Outfit (headings) & Inter (body text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <div class="app-container">
+            
+            <!-- PANEL DE CONTROLES (IZQUIERDA) -->
+            <aside class="control-panel">
+                <header class="app-header">
+                    <div class="header-main">
+                        <!-- Icono SVG de IA / Generador -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                            <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5 5 3Z"/>
+                            <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5Z"/>
+                        </svg>
+                        <h1 class="app-title">Tarjetas de Invitación </h1>
+                    </div>
+                    <button type="button" id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Tema Claro/Oscuro">
+                        <!-- Icono Sol (para cuando estemos en modo oscuro) -->
+                        <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="4"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                        </svg>
+                        <!-- Icono Luna (para cuando estemos en modo claro, oculto por defecto) -->
+                        <svg id="moonIcon" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                        </svg>
+                    </button>
+                </header>
+
+                <!-- 1. Campo de API Key (BYOP) -->
+                <div class="form-group">
+                    <label class="form-label" for="apiKey">
+                        Clave API de Pollinations
+                    </label>
+                    <div class="input-container">
+                        <input type="password" id="apiKey" class="form-input" placeholder="Introduce tu API_key aquí..." autocomplete="off">
+                        <button type="button" id="togglePasswordBtn" class="toggle-password-btn" title="Mostrar/Ocultar Clave">
+                            <!-- Icono Ojo Cerrado (por defecto) -->
+                            <svg id="eyeClosedIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                                <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                                <path d="M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                                <line x1="2" y1="2" x2="22" y2="22"/>
+                            </svg>
+                            <!-- Icono Ojo Abierto (oculto por defecto) -->
+                            <svg id="eyeOpenIcon" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Selector de Modelos de Imagen [modelo] -->
+                <div class="form-group">
+                    <label class="form-label" for="imageModel">Modelo Generador</label>
+                    <select id="imageModel" class="form-select">
+                        <option value="flux" selected>flux</option>
+                        <option value="zimage">zimage</option>
+                        <option value="klein">klein</option>
+                        <option value="grok-imagine">grok-imagine</option>
+                        <option value="nanobanana">nanobanana</option>
+                        <option value="gptimage">gptimage</option>
+                        <option value="gptimage-large">gptimage-large</option>
+                        <option value="wan-image">wan-image</option>
+                        <option value="qwen-image">qwen-image</option>
+                        <option value="gpt-image-2">gpt-image-2</option>
+                    </select>
+                </div>
+
+                <!-- Selector de Tipo de Diseño -->
+                <div class="form-group">
+                    <label class="form-label" for="designTypeSelect">Tipo de Diseño</label>
+                    <select id="designTypeSelect" class="form-select">
+                        <option value="cartel_publicitario" selected>Cartel Publicitario</option>
+                        <option value="tarjeta_de_grado">Tarjeta de Grado</option>
+                        <option value="tarjeta_de_matrimonio">Tarjeta de Matrimonio</option>
+                        <option value="tarjeta_de_quince_anos">Tarjeta de Quince Años</option>
+                        <option value="tarjeta_de_primera_comunion">Tarjeta de Primera Comunión</option>
+                        <option value="tarjeta_de_baby_shower">Tarjeta de Baby Shower</option>
+                        <option value="tarjeta_de_cumpleanos">Tarjeta de Cumpleaños</option>
+                        <option value="tarjeta_de_aniversario">Tarjeta de Aniversario</option>
+                        <option value="tarjeta_de_fiesta_especial">Tarjeta de Fiesta Especial</option>
+                        <option value="otro_objeto">Otro Objeto / Personalizado</option>
+                        <option value="invitaciones_corporativas">Invitaciones corporativas</option>
+                        <option value="invitaciones_corporativas">Invitaciones corporativas</option>
+                        <option value="certificados">Certificados</option>
+                        <option value="tarjeta_de_quince_anos">Diplomas</option>
+                        <option value="tarjeta_de_primera_comunion">Carnés</option>
+                        <option value="portadas_de_libros">Portadas de libros</option>
+                        <option value="posters_académicos">Posters académicos</option>
+                        <option value="flyers_turísticos">Flyers turísticos</option>
+                        <option value="catalogos">Catálogos</option>
+                        <option value="revistas_digitales">Revistas digitales</option>
+                        <option value="tarjetas_de_presentación">Tarjetas de presentación</option>
+                        <option value="menús_de_restaurantes">Menús de restaurantes</option>
+                        <option value="campañas_publicitarias">Campañas publicitarias</option>
+                    </select>
+                </div>
+
+                <!-- Selector de Semilla (Seed) -->
+                <div class="form-group">
+                    <label class="form-label" for="imageSeed">
+                        Semilla (Seed)
+                        <span class="label-badge">Opcional</span>
+                    </label>
+                    <div class="input-container">
+                        <input type="number" id="imageSeed" class="form-input" placeholder="Aleatoria..." min="0" step="1">
+                        <button type="button" id="randomSeedBtn" class="input-action-btn" title="Generar Semilla Aleatoria">🎲</button>
+                        <button type="button" id="lockSeedBtn" class="input-action-btn" title="Bloquear Semilla Actual">🔓</button>
+                    </div>
+                </div>
+
+                <!-- 1. Selector de Estilos [estilo] -->
+                <div class="form-group">
+                    <label class="form-label" for="styleSelect">Estilo Visual</label>
+                    <select id="styleSelect" class="form-select">
+                        <option value="futurista" selected>futurista</option>
+                        <option value="retro">retro</option>
+                        <option value="minimalista">minimalista</option>
+                        <option value="vintage">vintage</option>
+                        <option value="cyberpunk">cyberpunk</option>
+                    </select>
+                </div>
+
+                <!-- Selector de Relación de Aspecto -->
+                <div class="form-group">
+                    <label class="form-label" for="aspectRatioSelect">Relación de Aspecto</label>
+                    <select id="aspectRatioSelect" class="form-select">
+                        <option value="1:1" selected>1:1 (Cuadrado)</option>
+                        <option value="16:9">16:9 (Panorámico)</option>
+                        <option value="9:16">9:16 (Vertical Móvil)</option>
+                        <option value="3:4">3:4 (Retrato)</option>
+                        <option value="4:3">4:3 (Estándar)</option>
+                        <option value="3:2">3:2 (DSLR y mirrorless )</option>
+                    </select>
+                </div>
+
+                <!-- 2. Cuadro de texto para el título principal -->
+                <div class="form-group">
+                    <label class="form-label" for="titleInput">Título Principal</label>
+                    <input type="text" id="titleInput" class="form-input" value="Herramientas de IA" placeholder="Ej. Herramientas de IA, Innovación, etc.">
+                </div>
+
+                <!-- Control de superposición de texto en vivo -->
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="toggleOverlay" checked>
+                        <span class="checkmark"></span>
+                        Superponer texto en el diseño (Poster & Card Maker)
+                    </label>
+                </div>
+
+                <!-- Chips inteligentes para inyección rápida de parámetros -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Agregar Parámetros Rápidos
+                        <span class="label-badge">Haz clic para añadir</span>
+                    </label>
+                    <div class="chips-wrapper">
+                        <div class="chips-category">
+                            <span class="category-tag">Iluminación</span>
+                            <div class="chips-list" data-category="iluminacion">
+                                <button type="button" class="chip" data-value="luz neón vibrante">Neón</button>
+                                <button type="button" class="chip" data-value="iluminación de estudio dramática">Estudio</button>
+                                <button type="button" class="chip" data-value="claroscuro artístico">Claroscuro</button>
+                                <button type="button" class="chip" data-value="luz natural suave">Natural</button>
+                                <button type="button" class="chip" data-value="retroiluminación intensa">Retro</button>
+                            </div>
+                        </div>
+                        <div class="chips-category">
+                            <span class="category-tag">Cámara</span>
+                            <div class="chips-list" data-category="camara">
+                                <button type="button" class="chip" data-value="primer plano detallado (close-up)">Primer Plano</button>
+                                <button type="button" class="chip" data-value="vista aérea espectacular (drone shot)">Aéreo</button>
+                                <button type="button" class="chip" data-value="gran angular panorámico">Gran Angular</button>
+                                <button type="button" class="chip" data-value="plano medio cinematográfico">Plano Medio</button>
+                            </div>
+                        </div>
+                        <div class="chips-category">
+                            <span class="category-tag">Efectos</span>
+                            <div class="chips-list" data-category="efectos">
+                                <button type="button" class="chip" data-value="partículas mágicas flotantes">Partículas</button>
+                                <button type="button" class="chip" data-value="niebla volumétrica misteriosa">Niebla</button>
+                                <button type="button" class="chip" data-value="efectos glitch art">Glitch</button>
+                                <button type="button" class="chip" data-value="destellos de lente sutiles">Destellos</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Cuadro de texto editable con la estructura del prompt -->
+                <div class="form-group">
+                    <div class="prompt-editor-header">
+                        <label class="form-label" for="promptJson">Estructura del Prompt (JSON)</label>
+                        <div class="header-actions">
+                            <button type="button" id="importJsonBtn" class="editor-action-btn" title="Importar JSON">Importar</button>
+                            <button type="button" id="exportJsonBtn" class="editor-action-btn" title="Exportar JSON">Exportar</button>
+                            <button type="button" id="resetPromptBtn" class="reset-prompt-btn">Reiniciar</button>
+                        </div>
+                        <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                    </div>
+                    <textarea id="promptJson" class="form-textarea" spellcheck="false"></textarea>
+                    <div class="prompt-editor-header">
+                        <span id="jsonStatus" class="json-status valid">JSON Válido</span>
+                    </div>
+                </div>
+
+                <!-- 8. Botones de generación y descarga de la imagen -->
+                <div class="action-buttons">
+                    <div class="main-buttons-row">
+                        <button type="button" id="generateBtn" class="btn btn-primary">
+                            <span class="spinner" id="btnSpinner"></span>
+                            <span id="btnText">Generar Imagen</span>
+                        </button>
+                        <button type="button" id="surpriseBtn" class="btn btn-surprise" title="Sorpréndeme con una idea aleatoria">✨</button>
+                    </div>
+                    <button type="button" id="downloadBtn" class="btn btn-secondary" disabled>
+                        <!-- Icono SVG de descarga -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Descargar Diseño Completo
+                    </button>
+                </div>
+
+                <!-- Historial de Generaciones -->
+                <div class="form-group history-group">
+                    <label class="form-label">
+                        Historial de Creaciones
+                        <button type="button" id="clearHistoryBtn" class="clear-history-btn" title="Borrar Historial">Limpiar</button>
+                    </label>
+                    <div class="history-list-container" id="historyListContainer">
+                        <div class="history-empty">No hay diseños generados todavía.</div>
+                    </div>
+                </div>
+
+                <!-- 6. Nota discreta de plantilla y branding en el pie -->
+                <div class="app-branding">
+                    <span class="app-branding-text">Herramienta diseñada por el profesor Édgar Herrera con apoyo de las tecnologías <a href="https://www.chatgpt.com">ChatGPT</a> y <a href="https://antigravity.google/">Antigravity</a></span>
+                </div>
+            </aside>
+
+            <!-- LIENZO CON RELACIÓN DE ASPECTO 1:1 (DERECHA) -->
+            <main class="preview-panel">
+                <div class="canvas-wrapper">
+                    <!-- 7. Lienzo con relación de aspecto 1:1 -->
+                    <div class="canvas-card" id="canvasCard">
+                        <div class="canvas-content">
+                            
+                            <!-- Estado Placeholder Inicial -->
+                            <div class="canvas-placeholder" id="canvasPlaceholder">
+                                <div class="placeholder-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                                        <circle cx="9" cy="9" r="2"/>
+                                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                                    </svg>
+                                </div>
+                                <h3>Listo para Generar</h3>
+                                <p>Ingresa tu clave de API, ajusta tus parámetros artísticos y haz clic en "Generar Imagen" para ver los resultados aquí.</p>
+                            </div>
+
+                            <!-- Imagen Generada -->
+                            <img id="generatedImage" class="generated-image" alt="Imagen generada por IA">
+
+                            <!-- Capa de texto para Poster Maker (Vista Previa en vivo) -->
+                            <div class="canvas-text-overlay" id="canvasTextOverlay">
+                                <div class="overlay-title" id="overlayTitle">TARJETAS DE INVITACIÓN</div>
+                                <div class="overlay-subtitle" id="overlaySubtitle">Crea recursos educativos interactivos con inteligencia artificial</div>
+                                <div class="overlay-badge" id="overlayBadge">E.H.</div>
+                            </div>
+
+                            <!-- Capa de Carga (Spinner) -->
+                            <div class="canvas-loading" id="canvasLoading">
+                                <div class="pulse-loader">
+                                    <div class="pulse-circle"></div>
+                                    <div class="pulse-circle"></div>
+                                    <div class="pulse-inner"></div>
+                                </div>
+                                <span class="loading-text">Pintando tu obra maestra...</span>
+                            </div>
+
+                            <!-- Banner de Error -->
+                            <div class="error-banner" id="errorBanner">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                                <span id="errorText">Ha ocurrido un error al generar la imagen.</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <!-- Pie de página de información técnica -->
+                    <div class="discreet-footer">
+                        <span>API provista por <a href="https://pollinations.ai" target="_blank" rel="noopener noreferrer">pollinations.ai</a> | Lienzo 1024x1024</span>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- JS Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
